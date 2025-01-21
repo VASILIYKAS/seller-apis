@@ -11,6 +11,52 @@ logger = logging.getLogger(__file__)
 
 
 def get_product_list(page, campaign_id, access_token):
+    """
+    
+    Получить список товаров с яндекс маркета. Возвращает данные о товарах в формате JSON.
+
+    Args:
+        page (str): Номером страницы
+        campaign_id (str): Уникальный номер магазина
+        access_token (str): Уникальный ключ продавца для доступа к API
+
+    Returns:
+        value: Возвращает список словарей, содержащий информацию о товарах.
+
+    Raises:
+        requests.exceptions.HTTPError: Если запрос завершился с ошибкой (например, 
+                                        код ответа 4xx или 5xx).
+
+    Examples:
+        >>> page = "" 
+        >>> campaign_id = "ваш_campaign_id"
+        >>> access_token = "ваш_market_token"
+        >>> get_product_list(page, campaign_id, access_token)
+        [
+            {
+                "offer_id": "12345",
+                "title": "Товар 1",
+                "price": 1000,
+                ....
+            },
+            {
+                "offer_id": "67890",
+                "title": "Товар 2",
+                "price": 2000,
+                ....
+            },
+            ....
+        ]
+
+        >>> page = "" 
+        >>> campaign_id = "ваш_campaign_id"
+        >>> access_token = "ваш_market_token"
+        >>> get_product_list(page, campaign_id, access_token)
+        requests.exceptions.HTTPError: 400 Client Error: 
+        Bad Request for url: 
+        https://api.partner.market.yandex.ru/campaigns/"ваш_campaign_id"/offer-mapping-entries
+
+    """
     endpoint_url = "https://api.partner.market.yandex.ru/"
     headers = {
         "Content-Type": "application/json",
@@ -30,6 +76,39 @@ def get_product_list(page, campaign_id, access_token):
 
 
 def update_stocks(stocks, campaign_id, access_token):
+    """
+    
+    Обновляет информацию о количестве товаров на складе
+
+    Args:
+        stocks (list): Список словарей содержащий информация о товарах на складах
+        campaign_id (str): Уникальный номер магазина
+        access_token (str): Уникальный ключ продавца для доступа к API
+
+    Returns:
+        value: Возвращает список словарей, содержащий информацию о товарах.
+
+    Raises:
+        requests.exceptions.HTTPError: Если запрос завершился с ошибкой (например, 
+                                        код ответа 4xx или 5xx).
+
+    Examples:
+        >>> stocks = create_stocks(watch_remnants, offer_ids, warehouse_id)
+        >>> campaign_id = "ваш_campaign_id"
+        >>> access_token = "ваш_market_token"
+        >>> update_stocks(stocks, campaign_id, access_token)
+        Остатки товаров на складах.
+        
+
+        >>> stocks = create_stocks(watch_remnants, offer_ids, warehouse_id) 
+        >>> campaign_id = "ваш_campaign_id"
+        >>> access_token = "ваш_market_token"
+        >>> update_stocks(stocks, campaign_id, access_token)
+        requests.exceptions.HTTPError: 400 Client Error: 
+        Bad Request for url: 
+        https://api.partner.market.yandex.ru/campaigns/"ваш_campaign_id"/offers/stocks
+
+    """
     endpoint_url = "https://api.partner.market.yandex.ru/"
     headers = {
         "Content-Type": "application/json",
@@ -46,6 +125,40 @@ def update_stocks(stocks, campaign_id, access_token):
 
 
 def update_price(prices, campaign_id, access_token):
+    """
+    
+    Обновляет цену товаров
+
+    Args:
+        prices (list): Список словарей содержащий уникальный номер товара и его цену
+        campaign_id (str): Уникальный номер магазина
+        access_token (str): Уникальный ключ продавца для доступа к API
+
+    Returns:
+        value: Возвращает список словарей, содержащий информацию о цене товаров.
+
+    Raises:
+        requests.exceptions.HTTPError: Если запрос завершился с ошибкой (например, 
+                                        код ответа 4xx или 5xx).
+
+    Examples:
+        >>> prices = create_prices(watch_remnants, offer_ids)
+        >>> campaign_id = "ваш_campaign_id"
+        >>> access_token = "ваш_market_token"
+        >>> update_price(prices, campaign_id, access_token)
+        Список товаров.
+        Товар с информацией о новой цене на него.
+        
+
+        >>> prices = create_prices(watch_remnants, offer_ids) 
+        >>> campaign_id = "ваш_campaign_id"
+        >>> access_token = "ваш_market_token"
+        >>> update_price(prices, campaign_id, access_token)
+        requests.exceptions.HTTPError: 400 Client Error: 
+        Bad Request for url: 
+        https://api.partner.market.yandex.ru/campaigns/"ваш_campaign_id"/offer-prices/updates
+
+    """
     endpoint_url = "https://api.partner.market.yandex.ru/"
     headers = {
         "Content-Type": "application/json",
@@ -62,7 +175,35 @@ def update_price(prices, campaign_id, access_token):
 
 
 def get_offer_ids(campaign_id, market_token):
-    """Получить артикулы товаров Яндекс маркета"""
+    """
+    
+    Получить артикулы товаров с яндекс маркета
+
+    Args:
+        campaign_id (str): Уникальный номер магазина
+        market_token (str): Уникальный ключ продавца для доступа к API
+
+    Returns:
+        value: Возвращает список, содержащий уникальный номер товара (SKU)
+
+    Raises:
+        requests.exceptions.HTTPError: Если запрос завершился с ошибкой (например, 
+                                        код ответа 4xx или 5xx).
+
+    Examples:
+        >>> campaign_id = "ваш_campaign_id"
+        >>> market_token = "ваш_market_token"
+        >>> get_offer_ids(campaign_id, market_token)
+        ["123", "456", "789", "101", "121"]
+        
+        >>> campaign_id = "ваш_campaign_id"
+        >>> market_token = "ваш_market_token"
+        >>> get_offer_ids(campaign_id, market_token)
+        requests.exceptions.HTTPError: 400 Client Error: 
+        Bad Request for url: 
+        https://api.partner.market.yandex.ru/campaigns/"ваш_campaign_id"/offer-mapping-entries
+
+    """
     page = ""
     product_list = []
     while True:
@@ -78,6 +219,56 @@ def get_offer_ids(campaign_id, market_token):
 
 
 def create_stocks(watch_remnants, offer_ids, warehouse_id):
+    """
+    
+    Обновляет количестов товаров и добавляет отсутствующие товары
+
+    Args:
+        watch_remnants (str): список словарей, содержащий данные о товарах
+        offer_ids (str): Список артикулов товаров с яндекс маркета
+        warehouse_id (str): Уникальный номер склада, где хранится ваш товар
+
+    Returns:
+        value: Возвращает список словарей, содержащий артикли товаров и их остатки
+
+    Examples:
+        >>> watch_remnants = download_stock()
+        >>> offer_ids = get_offer_ids(campaign_fbs_id, market_token)
+        >>> warehouse_id = "ваш_warehouse_id"
+        >>> create_stocks(watch_remnants, offer_ids, warehouse_id)
+        [   
+            {
+                    "sku": 123456,
+                    "warehouseId": 1122334455,
+                    "items": [
+                        {
+                            "count": 6,
+                            "type": "FIT",
+                            "updatedAt": "2025-01-20T17:14:52Z",
+                        }
+                    ],
+            },
+            {
+                    "sku": 789012,
+                    "warehouseId": 1122334455,
+                    "items": [
+                        {
+                            "count": 100,
+                            "type": "FIT",
+                            "updatedAt": "2025-01-20T17:14:53Z",
+                        }
+                    ],
+            },
+            ....
+        ]    
+
+        >>> watch_remnants = download_stock()
+        >>> offer_ids = get_offer_ids(campaign_fbs_id, market_token)
+        >>> warehouse_id = "ваш_warehouse_id"
+        >>> create_stocks(watch_remnants, offer_ids, warehouse_id)
+        ValueError: Если входные данные некорректны
+
+    """
     # Уберем то, что не загружено в market
     stocks = list()
     date = str(datetime.datetime.utcnow().replace(microsecond=0).isoformat() + "Z")
@@ -123,6 +314,43 @@ def create_stocks(watch_remnants, offer_ids, warehouse_id):
 
 
 def create_prices(watch_remnants, offer_ids):
+    """
+    
+    Добавляет цену на товары
+
+    Args:
+        watch_remnants (str): список словарей, содержащий данные о товарах
+        offer_ids (str): Список артикулов товаров с яндекс маркета
+
+    Returns:
+        value: Возвращает список словарей, содержащий информацию о цене товара
+
+    Examples:
+        >>> watch_remnants = download_stock()
+        >>> offer_ids = get_offer_ids(campaign_fbs_id, market_token)
+        >>> create_prices(watch_remnants, offer_ids)
+        [   
+            {
+                "id": 123456,
+                "price": {
+                    "value": 6890,
+                    "currencyId": "RUR",
+            },
+            {
+                "id": 789101,
+                "price": {
+                    "value": 4990,
+                    "currencyId": "RUR",
+            },
+            ....
+        ]
+
+        >>> watch_remnants = download_stock()
+        >>> offer_ids = get_offer_ids(campaign_fbs_id, market_token)
+        >>> create_prices([], offer_ids)
+        []
+        
+    """
     prices = []
     for watch in watch_remnants:
         if str(watch.get("Код")) in offer_ids:
@@ -143,6 +371,46 @@ def create_prices(watch_remnants, offer_ids):
 
 
 async def upload_prices(watch_remnants, campaign_id, market_token):
+    """
+    
+    Асинхронная функция, предназначена для загрузки цен
+    
+    Args:
+        watch_remnants (list): Cписок словарей, содержащий данные о товарах
+        campaign_id (str): Уникальный номер магазина 
+        market_token (str): Уникальный ключ продавца для доступа к API
+    
+    Returns:
+        value: Возвращает список словарей, содержащий информацию о цене товара
+
+    Examples:
+        >>> watch_remnants = download_stock()
+        >>> campaign_id = "ваш_campaign_id"
+        >>> market_token = "ваш_market_token"
+        >>> upload_prices(watch_remnants, campaign_id, market_token)
+        [   
+            {
+                "id": 123456,
+                "price": {
+                    "value": 6890,
+                    "currencyId": "RUR",
+            },
+            {
+                "id": 789101,
+                "price": {
+                    "value": 4990,
+                    "currencyId": "RUR",
+            },
+            ....
+        ]
+
+        >>> watch_remnants = download_stock()
+        >>> campaign_id = "ваш_campaign_id"
+        >>> market_token = "ваш_market_token"
+        >>> upload_prices(watch_remnants, campaign_id, market_token)
+        []
+
+    """
     offer_ids = get_offer_ids(campaign_id, market_token)
     prices = create_prices(watch_remnants, offer_ids)
     for some_prices in list(divide(prices, 500)):
@@ -150,7 +418,96 @@ async def upload_prices(watch_remnants, campaign_id, market_token):
     return prices
 
 
+
 async def upload_stocks(watch_remnants, campaign_id, market_token, warehouse_id):
+    """
+    
+    Асинхронная функция, предназначена для загрузки обновленного количества товаров
+    
+    Args:
+        watch_remnants (list): Cписок словарей, содержащий данные о товарах
+        campaign_id (str): Уникальный номер магазина 
+        market_token (str): Уникальный ключ продавца для доступа к API
+        warehouse_id (str): Уникальный номер склада, где хранится ваш товар
+
+    Returns:
+        value: Возвращает список словарей, содержащий артикли товаров, их остатки,
+        номер склада, состояние товара и дату обновления
+
+    Examples:
+        >>> watch_remnants = download_stock()
+        >>> campaign_id = "ваш_campaign_id"
+        >>> market_token = "ваш_market_token"
+        >>> upload_stocks(watch_remnants, campaign_id, market_token, warehouse_id)
+        [   
+            {
+                    "sku": 123456,
+                    "warehouseId": 1122334455,
+                    "items": [
+                        {
+                            "count": 6,
+                            "type": "FIT",
+                            "updatedAt": "2025-01-20T17:14:52Z",
+                        }
+                    ],
+            },
+            {
+                    "sku": 789012,
+                    "warehouseId": 1122334455,
+                    "items": [
+                        {
+                            "count": 100,
+                            "type": "FIT",
+                            "updatedAt": "2025-01-20T17:14:53Z",
+                        }
+                    ],
+            },
+            ....
+        ],
+        [   
+            {
+                    "sku": 123456,
+                    "warehouseId": 1122334455,
+                    "items": [
+                        {
+                            "count": 6,
+                            "type": "FIT",
+                            "updatedAt": "2025-01-20T17:14:52Z",
+                        }
+                    ],
+            },
+            {
+                    "sku": 789012,
+                    "warehouseId": 1122334455,
+                    "items": [
+                        {
+                            "count": 100,
+                            "type": "FIT",
+                            "updatedAt": "2025-01-20T17:14:53Z",
+                        }
+                    ],
+            },
+            {
+                    "sku": 131415,
+                    "warehouseId": 1122334455,
+                    "items": [
+                        {
+                            "count": 0,
+                            "type": "FIT",
+                            "updatedAt": "2025-01-20T17:14:53Z",
+                        }
+                    ],
+            },
+            ....
+        ]  
+        
+        >>> watch_remnants = download_stock()
+        >>> campaign_id = "ваш_campaign_id"
+        >>> market_token = "ваш_market_token"
+        >>> upload_stocks([], campaign_id, market_token, warehouse_id)
+        [], []
+
+    """
     offer_ids = get_offer_ids(campaign_id, market_token)
     stocks = create_stocks(watch_remnants, offer_ids, warehouse_id)
     for some_stock in list(divide(stocks, 2000)):
