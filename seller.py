@@ -14,7 +14,7 @@ logger = logging.getLogger(__file__)
 def get_product_list(last_id, client_id, seller_token):
     """
     
-    Получить список товаров магазина озон. Возвращает данные о товарах в формате JSON.
+    Получить список товаров магазина озон.
 
     Args:
         last_id (str): Идентификатор последнего товара
@@ -76,7 +76,7 @@ def get_product_list(last_id, client_id, seller_token):
 def get_offer_ids(client_id, seller_token):
     """
     
-    Получить артикулы товаров магазина озон. Возвращает список артикулов.
+    Получить артикулы товаров магазина озон.
 
     Args:
         client_id (str): Идентификатор клиента для проверки подлинности пользователя
@@ -174,11 +174,7 @@ def update_stocks(stocks: list, client_id, seller_token):
         value: Возвращает словарь, содержащий результаты обновления остатков для каждого товара.
 
     Examples:
-        >>> prices = [
-        {"offer_id": PH11042, "stock": 0}, 
-        {"offer_id": 136748, "stock": 1},
-        .... 
-        ]
+        >>> stocks = create_stocks(watch_remnants, offer_ids)
         >>> client_id = "ваш_client_id"
         >>> seller_token = "ваш_seller_token"
         >>> update_stocks(stocks, client_id, seller_token)
@@ -195,14 +191,10 @@ def update_stocks(stocks: list, client_id, seller_token):
             ]
         }
 
-        >>> prices = [
-        "offer_id": PH11042, "stock": 0, 
-        "offer_id": 136748, "stock": 1,
-        .... 
-        ]
+        >>> stocks = create_stocks(watch_remnants, offer_ids)
         >>> client_id = "ваш_client_id"
         >>> seller_token = "ваш_seller_token"
-        >>> update_price(prices, client_id, seller_token)
+        >>> update_stocks(stocks, client_id, seller_token)
         requests.exceptions.HTTPError: 400 Client Error: 
         Bad Request for url: https://api-seller.ozon.ru/v1/product/import/prices
 
@@ -338,7 +330,7 @@ def create_prices(watch_remnants, offer_ids):
     Examples:
         >>> watch_remnants = download_stock()
         >>> offer_ids = get_offer_ids(client_id, seller_token)
-        >>> create_stocks(watch_remnants, offer_ids)
+        >>> create_prices(watch_remnants, offer_ids)
         [
             {
                 "auto_action_enabled": "UNKNOWN",
@@ -449,6 +441,9 @@ async def upload_prices(watch_remnants, client_id, seller_token):
         client_id (str): Идентификатор клиента для проверки подлинности пользователя
         seller_token (str): Уникальный ключ продавца для доступа к API
 
+    Returns:
+        value: Возвращает список словарей, содержащий информацию о цене товара
+
     Examples:
         >>> watch_remnants = download_stock()
         >>> client_id = "ваш_client_id"
@@ -496,6 +491,9 @@ async def upload_stocks(watch_remnants, client_id, seller_token):
         client_id (str): Идентификатор клиента для проверки подлинности пользователя
         seller_token (str): Уникальный ключ продавца для доступа к API
 
+    Returns:
+        value: Возвращает список словарей, содержащий артикли товаров и их остатки
+
     Examples:
         >>> watch_remnants = download_stock()
         >>> client_id = "ваш_client_id"
@@ -518,12 +516,7 @@ async def upload_stocks(watch_remnants, client_id, seller_token):
         >>> client_id = "ваш_client_id"
         >>> seller_token = "ваш_seller_token"
         >>> upload_stocks([], client_id, seller_token)
-        [], [
-            {"offer_id": 136748, "stock": 0},
-            {"offer_id": 136749, "stock": 0},
-            {"offer_id": 136750, "stock": 0},
-            ....
-        ]
+        [], []
 
     """
     offer_ids = get_offer_ids(client_id, seller_token)
