@@ -21,7 +21,7 @@ def get_product_list(page, campaign_id, access_token):
         access_token (str): Уникальный ключ продавца для доступа к API
 
     Returns:
-        value: Возвращает список словарей, содержащий информацию о товарах.
+        list of dict: Возвращает список словарей, содержащий информацию о товарах.
 
     Raises:
         requests.exceptions.HTTPError: Если запрос завершился с ошибкой (например, 
@@ -86,7 +86,7 @@ def update_stocks(stocks, campaign_id, access_token):
         access_token (str): Уникальный ключ продавца для доступа к API
 
     Returns:
-        value: Возвращает список словарей, содержащий информацию о товарах.
+        list of dict: Возвращает список словарей, содержащий информацию о товарах.
 
     Raises:
         requests.exceptions.HTTPError: Если запрос завершился с ошибкой (например, 
@@ -135,7 +135,7 @@ def update_price(prices, campaign_id, access_token):
         access_token (str): Уникальный ключ продавца для доступа к API
 
     Returns:
-        value: Возвращает список словарей, содержащий информацию о цене товаров.
+        list of dict: Возвращает список словарей, содержащий информацию о цене товаров.
 
     Raises:
         requests.exceptions.HTTPError: Если запрос завершился с ошибкой (например, 
@@ -184,7 +184,7 @@ def get_offer_ids(campaign_id, market_token):
         market_token (str): Уникальный ключ продавца для доступа к API
 
     Returns:
-        value: Возвращает список, содержащий уникальный номер товара (SKU)
+        list: Возвращает список, содержащий уникальный номер товара (SKU)
 
     Raises:
         requests.exceptions.HTTPError: Если запрос завершился с ошибкой (например, 
@@ -229,7 +229,7 @@ def create_stocks(watch_remnants, offer_ids, warehouse_id):
         warehouse_id (str): Уникальный номер склада, где хранится ваш товар
 
     Returns:
-        value: Возвращает список словарей, содержащий артикли товаров и их остатки
+        list of dict: Возвращает список словарей, содержащий артикли товаров и их остатки
 
     Examples:
         >>> watch_remnants = download_stock()
@@ -323,7 +323,7 @@ def create_prices(watch_remnants, offer_ids):
         offer_ids (str): Список артикулов товаров с яндекс маркета
 
     Returns:
-        value: Возвращает список словарей, содержащий информацию о цене товара
+        list of dict: Возвращает список словарей, содержащий информацию о цене товара
 
     Examples:
         >>> watch_remnants = download_stock()
@@ -381,7 +381,7 @@ async def upload_prices(watch_remnants, campaign_id, market_token):
         market_token (str): Уникальный ключ продавца для доступа к API
     
     Returns:
-        value: Возвращает список словарей, содержащий информацию о цене товара
+        list of dict: Возвращает список словарей, содержащий информацию о цене товара
 
     Examples:
         >>> watch_remnants = download_stock()
@@ -431,7 +431,7 @@ async def upload_stocks(watch_remnants, campaign_id, market_token, warehouse_id)
         warehouse_id (str): Уникальный номер склада, где хранится ваш товар
 
     Returns:
-        value: Возвращает список словарей, содержащий артикли товаров, их остатки,
+        list of dict: Возвращает список словарей, содержащий артикли товаров, их остатки,
         номер склада, состояние товара и дату обновления
 
     Examples:

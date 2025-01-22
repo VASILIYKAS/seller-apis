@@ -22,7 +22,7 @@ def get_product_list(last_id, client_id, seller_token):
         seller_token (str): Уникальный ключ продавца для доступа к API
 
     Returns:
-        value: Возвращает словарь, содержащий информацию о товарах.
+        dict: Возвращает словарь, содержащий информацию о товарах.
 
     Raises:
         requests.exceptions.HTTPError: Если запрос завершился с ошибкой (например, 
@@ -83,7 +83,7 @@ def get_offer_ids(client_id, seller_token):
         seller_token (str): Уникальный ключ продавца для доступа к API
 
     Returns:
-        value: Возвращает список, содержащий артикулы товаров.
+        list: Возвращает список, содержащий артикулы товаров.
 
     Examples:
         >>> client_id = "ваш_client_id"
@@ -123,7 +123,7 @@ def update_price(prices: list, client_id, seller_token):
         seller_token (str): Уникальный ключ продавца для доступа к API
 
     Returns:
-        value: Возвращает словарь, содержащий результаты обновления цен для каждого товара.
+        dict: Возвращает словарь, содержащий результаты обновления цен для каждого товара.
 
     Examples:
         >>> prices = [2590, 14200, 29990]
@@ -166,12 +166,12 @@ def update_stocks(stocks: list, client_id, seller_token):
     Обновляет информацию о количестве товаров на складе
 
     Args:
-        stocks (list): Список словарей содержащий информация о товарах на складах
+        stocks (list): Список словарей содержащий информацию о товарах на складах
         client_id (str): Идентификатор клиента для проверки подлинности пользователя
         seller_token (str): Уникальный ключ продавца для доступа к API
 
     Returns:
-        value: Возвращает словарь, содержащий результаты обновления остатков для каждого товара.
+        dict: Возвращает словарь, содержащий результаты обновления остатков для каждого товара.
 
     Examples:
         >>> stocks = create_stocks(watch_remnants, offer_ids)
@@ -213,11 +213,11 @@ def update_stocks(stocks: list, client_id, seller_token):
 def download_stock():
     """
     
-    Скачивает файл содержащий информация об остатках товаров с сайта casio 
+    Скачивает файл содержащий информацию об остатках товаров с сайта casio 
     и сохраняет его содержимое в переменную
 
     Returns:
-        value: Возвращает список словарей, содержащий данные о товарах
+        list of dict: Возвращает список словарей, содержащий данные о товарах
 
     Examples:
         
@@ -272,7 +272,7 @@ def create_stocks(watch_remnants, offer_ids):
 
 
     Returns:
-        value: Возвращает список словарей, содержащий артикли товаров и их остатки.
+        list of dict: Возвращает список словарей, содержащий артикли товаров и их остатки.
 
     Examples:
         >>> watch_remnants = download_stock()
@@ -325,7 +325,7 @@ def create_prices(watch_remnants, offer_ids):
         offer_ids (list): Список артикулов товаров
 
     Returns:
-        value: Возвращает список словарей, содержащий информацию о цене товара
+        list of dict: Возвращает список словарей, содержащий информацию о цене товара
 
     Examples:
         >>> watch_remnants = download_stock()
@@ -378,7 +378,7 @@ def price_conversion(price: str) -> str:
         price (str): Цена товара в строковом формате.
 
     Returns:
-        value: Возвращает отформатированную цену, содержащию только целые числа.
+        str: Возвращает отформатированную цену, содержащию только целые числа.
 
     Examples:
         >>> price="5'990.00 руб" 
@@ -442,7 +442,7 @@ async def upload_prices(watch_remnants, client_id, seller_token):
         seller_token (str): Уникальный ключ продавца для доступа к API
 
     Returns:
-        value: Возвращает список словарей, содержащий информацию о цене товара
+        list of dict: Возвращает список словарей, содержащий информацию о цене товара
 
     Examples:
         >>> watch_remnants = download_stock()
@@ -492,7 +492,7 @@ async def upload_stocks(watch_remnants, client_id, seller_token):
         seller_token (str): Уникальный ключ продавца для доступа к API
 
     Returns:
-        value: Возвращает список словарей, содержащий артикли товаров и их остатки
+        list of dict: Возвращает список словарей, содержащий артикли товаров и их остатки
 
     Examples:
         >>> watch_remnants = download_stock()
