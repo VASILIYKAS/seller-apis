@@ -217,7 +217,7 @@ def download_stock():
     и сохраняет его содержимое в переменную
 
     Returns:
-        list of dict: Возвращает список словарей, содержащий данные о товарах
+        list: Возвращает список словарей, содержащий данные о товарах
 
     Examples:
         
@@ -272,7 +272,7 @@ def create_stocks(watch_remnants, offer_ids):
 
 
     Returns:
-        list of dict: Возвращает список словарей, содержащий артикли товаров и их остатки.
+        list: Возвращает список словарей, содержащий артикли товаров и их остатки.
 
     Examples:
         >>> watch_remnants = download_stock()
@@ -325,7 +325,7 @@ def create_prices(watch_remnants, offer_ids):
         offer_ids (list): Список артикулов товаров
 
     Returns:
-        list of dict: Возвращает список словарей, содержащий информацию о цене товара
+        list: Возвращает список словарей, содержащий информацию о цене товара
 
     Examples:
         >>> watch_remnants = download_stock()
@@ -442,7 +442,7 @@ async def upload_prices(watch_remnants, client_id, seller_token):
         seller_token (str): Уникальный ключ продавца для доступа к API
 
     Returns:
-        list of dict: Возвращает список словарей, содержащий информацию о цене товара
+        list: Возвращает список словарей, содержащий информацию о цене товара
 
     Examples:
         >>> watch_remnants = download_stock()
@@ -492,7 +492,7 @@ async def upload_stocks(watch_remnants, client_id, seller_token):
         seller_token (str): Уникальный ключ продавца для доступа к API
 
     Returns:
-        list of dict: Возвращает список словарей, содержащий артикли товаров и их остатки
+        list: Возвращает список словарей, содержащий артикли товаров и их остатки
 
     Examples:
         >>> watch_remnants = download_stock()
